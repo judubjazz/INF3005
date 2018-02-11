@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% if mois  %}
+      <h1>voici les mois pour le matricule {{ matricule }}</h1>
+        {% for un_mois in mois %}
+            <p><a href="/{{ matricule }}/overview/{{ un_mois }}">{{ un_mois }}</a></p>
+        {% endfor %}
+    {% endif %}
+    {% if infos  %}
+      <h1>voici les info pour le matricule {{ matricule }} en date du {{ date }}</h1>
+        {% for info in infos %}
+            <form action="/login" method="post">
+                <h2>id = {{ info[0] }}</h2>
+                <p>
+                    <label>id</label>
+                    <input type = "text" id = "id" value = {{ info[0] }} />
+                </p>
+                <p>
+                    <label>matricule</label>
+                    <input type = "text" id = "matricule" value = {{ info[1] }} />
+                </p>
+                <p>
+                    <label>code projet</label>
+                    <input type = "text" id = "code_de_projet" value = {{ info[2] }} />
+                </p>
+                <p>
+                    <label>date</label>
+                    <input type = "text" id = "idate" value = {{ info[3] }} />
+                </p>
+                <p>
+                    <label>durée</label>
+                    <input type = "text" id = "duree" value = {{ info[4] }} />
+                </p>
+                  <input type="submit" value="Modifier">
+                <input type="submit" value="Supprimer">
+            </form>
+        {% endfor %}
+    {% endif %}
+    {% if infos == None and mois == None %}
+         <h1>il n y a pas d  info pour le matricule {{ matricule }} en date du {{ date }}</h1>
+    {% endif %}
+{% endblock %}

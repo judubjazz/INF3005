@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}      
+  <h1>Bonsoir!</h1>
+  <p>entrez votre matricule sous la forme ABC-12</p>
+  {% if erreur %}
+    <p style="color:#F00">{{ erreur }}</p>
+    <form action="/login" method="POST">
+      <label for="matricule">Matricule</label>&nbsp;<input type="text" id="matricule" name="matricule" maxlength="20">
+      <br>
+      <input type="submit" value="Se connecter">
+    </form>
+  {% else %}
+    <form action="/login" method="POST">
+      <label for="matricule">Matricule</label>&nbsp;<input type="text" id="matricule" name="matricule" maxlength="20">
+      <br>
+      <input type="submit" value="Submit">
+    </form>
+  {% endif %}
+{% endblock %}      
