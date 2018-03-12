@@ -1,0 +1,206 @@
+/*----------------------LAYOUT  BOOSTRAP NAV----------------------------------------------*/
+
+body{
+  background: url(/static/images/night.jpg) no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+
+.h2_entete{
+    color:whitesmoke !important;
+}
+html{
+  height: 100%;
+  overflow: hidden;
+}
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+  padding-top: 20px;
+  height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+  color: black;
+  padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {height:auto;}
+}
+
+
+/*----------------------MOIS.HTML---------------------------------------------*/
+
+.a_mois{
+    color:gold;!important;
+    font-size: x-large;
+}
+
+.a_mois:hover{
+    color:#5D94FB;
+    background-color: inherit;
+}
+
+
+
+
+/*----------------------JOUR.HTML----------------------------------------------*/
+.container-info{
+    margin-left: 200px;
+    margin-bottom: 240px;
+}
+
+.table_jour{
+    /*border-spacing:7px 7px;*/
+    /*border-collapse: separate;*/
+    box-shadow: 0 1px 2px #C3C3C3;
+}
+
+#div_carousel{
+    padding: 7%;
+}
+#div_carousel table{
+    background-color:#5D94FB;
+    /*margin-left: 250px;*/
+    /*margin-bottom: 100px;*/
+    margin:auto;
+    text-align: center;
+    border-spacing:7px 7px;
+    border-collapse: separate;
+    box-shadow: 3px 3px rgba(211, 211, 211, 0.6);;
+    border-radius: 1.5%;
+}
+#div_carousel label{
+    text-align: left;
+
+}
+#shooting_star{
+    position: relative;
+    margin-left: 1000px;
+    margin-top: -500px;
+    display: none;
+}
+/*----------------------FLECHE JOUR SUIVANT/PRECEDENT----------------------------------------------*/
+
+a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+    color:green;
+}
+
+a:hover {
+    background-color: inherit;
+}
+
+.previous {
+    background-color: #5D94FB;
+    color: black;
+}
+
+.next {
+    background-color: #5D94FB;
+    color: black;
+}
+
+.round {
+    border-radius: 50%;
+}
+
+.round:hover{
+    background-color: black;
+    color: white;
+}
+
+div.inline {
+    float:left;
+    padding:3%;
+}
+div.container-info{
+
+}
+/*.clearBoth { clear:both; }*/
+
+
+/*----------------------CALENDAR----------------------------------------------*/
+
+
+#wrap {
+
+    margin: 0 auto;
+    }
+
+#external-events {
+    float: left;
+    width: 150px;
+    padding: 0 10px;
+    text-align: left;
+    }
+
+#external-events h4 {
+    font-size: 16px;
+    margin-top: 0;
+    padding-top: 1em;
+    }
+
+.external-event { /* try to mimick the look of a real event */
+    margin: 10px 0;
+    padding: 2px 4px;
+    background: #3366CC;
+    color: #fff;
+    font-size: .85em;
+    cursor: pointer;
+    }
+
+#external-events p {
+    margin: 1.5em 0;
+    font-size: 11px;
+    color: #666;
+    }
+
+#external-events p input {
+    margin: 0;
+    vertical-align: middle;
+    }
+
+#calendar {
+/* 		float: right; */
+    margin: 0 auto;
+    width: 600px;
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px #C3C3C3;
+    -webkit-box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
+    -moz-box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
+    box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
+    }
+
+
+/*----------------------404----------------------------------------------*/
+#train{
+    position: relative;
+}
+
+#erreur_404 {
+    color:gold;
+}
+
+#erreur_400 {
+    color:gold;
+}

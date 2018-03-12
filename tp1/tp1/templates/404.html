@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <title>404</title>
+    <meta name="description" content="Données introuvables"/>
+    <script src="/static/js/animate.js"></script>
+<script>
+
+window.onload = function() {
+  let canvas = document.getElementById('myCanvas');
+  let context = canvas.getContext('2d');
+  let x = 0;
+  let y = 0;
+  let width = canvas.width/2;
+  let height = canvas.height/2;
+  let angle = 0;
+  let imageObj = new Image();
+  imageObj.src = '/static/images/star.png';
+
+
+convertToRadians=(degree) => degree*(Math.PI/180);
+
+
+incrementAngle = ()=> {
+    angle++;
+    if(angle > 360) {
+        angle = 0;
+    }
+}
+
+drawRandomlyColoredRectangle= ()=> {
+    context.save();
+    <!-- clear the drawing surface -->
+    context.clearRect(0,0,1280,720);
+    <!-- you can also stroke a rect, the operations need to happen in order -->
+    incrementAngle();
+    context.translate(canvas.width/2,canvas.height/2);
+    context.rotate(convertToRadians(angle));
+    context.drawImage(imageObj, width/2*(-1), height/2*(-1), width, height);
+    context.translate(-canvas.width/2,-canvas.height/2);
+    context.restore();
+
+};
+
+setInterval(drawRandomlyColoredRectangle, 20);
+}
+</script>
+
+
+{% endblock %}
+
+{% block content %}
+
+    <h2 class="h2_entete">404</h2>
+    <h3 id="erreur_404"></h3>
+    <canvas id="myCanvas" width="120" height="120"></canvas>
+
+{% endblock %}
+
+{% block sidenav_right %}
+{% endblock %}

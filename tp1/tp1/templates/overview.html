@@ -1,16 +1,92 @@
 {% extends "layout.html" %}
-{% block content %}
-  <h1>Création d'un compte</h1>
-  {% if error %}
-    <p style="color:#F00">Tous les champs sont obligatoires. Veuillez recommencer.</p>
-  {% endif %}
-  <form action="/formulaire" method="POST">
-    <label for="champ_username">Nom d'utilisateur</label>&nbsp;<input type="text" id="champ_username" name="username" maxlength="25">
-    <br>
-    <label for="champ_password">Mot de passe</label>&nbsp;<input type="password" id="champ_password" name="password" maxlength="40">
-    <br>
-    <label for="champ_email">Courriel</label>&nbsp;<input type="text" id="champ_email" name="email" maxlength="100">
-    <br>
-    <input type="submit" value="Soumettre">
-  </form>
+
+{% block head %}
+    <title>Le Calendrier</title>
+    <meta name="description" content="Les informations d'un matricule pour un mois affichées sur un calendrier"/>
+
+    <link rel='stylesheet' href='/static/fullcalendar-3.8.2/fullcalendar.css' />
+
+    <script src='/static/fullcalendar-3.8.2/lib/moment.min.js'></script>
+    <script src='/static/fullcalendar-3.8.2/fullcalendar.js'></script>
+    <script>
+
+    $(document).ready(function() {
+        let events = [];
+        let dict= {};
+        let dateString
+
+        {% if infos %}
+
+            let infos = {{ infos|tojson|safe}};
+
+            for (let i = 0; i< infos.length; ++i){
+
+                let info = infos[i];
+                let id =info[0];
+                let matricule = info[1];
+                let code_projet = info[2];
+                dateString =info[3];
+                let duree = info[4];
+
+                if(dict[dateString]){
+                    dict[dateString] +=duree;
+                }else{
+                    dict[dateString]=duree;
+                }
+
+                let object= {title:code_projet + ' duree:'+ duree, start:dateString,allDay:true};
+                events.push(object);
+            }
+
+            if(dict){
+                for (x in dict) {
+                    //enlever overview du url
+                    let url = window.location.href;
+                    url = window.location.href.slice(0,-16);
+                    url+=x;
+                     let object = {title: 'duree totale:' + dict[x], start:x, allDay: true, url:url};
+                     events.push(object);
+                }
+            }
+
+        $('#calendar').fullCalendar({
+            header: {
+				left:'agendaDay,agendaWeek,month' ,
+				center: 'title',
+				right: 'today prev,next '
+			},
+            // put your options and callbacks here
+            schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+            events: events
+        });
+
+        $('#calendar').fullCalendar('gotoDate', dateString);
+
+        {% else %}
+            $(document).ready(()=>{
+                showText("#span_bowser", "AUCUNE DONNÉE POUR CE MOIS", 0, 100);
+
+            });
+        {% endif %}
+
+    });
+    </script>
+
+{% endblock %}
+
+{%block content%}
+
+    <body>
+        <div id='wrap'>
+
+            <div id='calendar'></div>
+
+            <div style='clear:both'></div>
+         </div>
+    </body>
+
+{% endblock %}
+
+{% block sidenav_right %}
+
 {% endblock %}

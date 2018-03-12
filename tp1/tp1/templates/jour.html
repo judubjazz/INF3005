@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+
+{% block head %}
+  <title>Les données du jour courrant</title>
+  <meta name="description" content="Les informations d'un matricule pour aujourd'hui"/>
+{% endblock %}
+
+{% block content %}
+
+<h2 class="h2_entete">Voici les infos pour le jour du {{ date }}</h2>
+<a class="previous round" onclick=naviguer_jour("yesterday",window.location.href.slice(-11))>&#8249;</a>
+<a class="next round" onclick=naviguer_jour("tomorrow",window.location.href.slice(-11))>&#8250;</a>
+
+
+{% if erreur %}
+    <h3 id="erreur_400" style="color: gold"></h3>
+    <canvas id="myCanvas"></canvas>
+{% else %}
+
+
+    <div class = "row" >
+        <div class="col-md-12">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+                 <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    {% for info in infos %}
+                        <li data-target="#carousel-example-generic" data-slide-to={{ loop.index0 }} class={% if loop.index0 == 0 %}active{% endif %}></li>
+                    {% endfor %}
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+
+                {% for info in infos %}
+
+                    <div id = "div_carousel" class="item{% if loop.index0 == 0 %} active{% endif %}">
+                      <table class="table_jour">
+                            <thead>
+                              <tr >
+                                <th colspan="2" id="{{ info[0]}}" style="text-align: center">{{ info[0] }}</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td><label for="matricule">Matricule</label></td>
+                                <td><input  class="form-control" type="text" id={{ "matricule"+info[0]|string }} name={{ "matricule"+info[0]|string }} maxlength="20" value="{{ info[1] }}"></td>
+                              </tr>
+                              <tr>
+                                <td><label for="code_projet">code projet</label></td>
+                                <td><input  class="form-control" type="text" id={{"code_projet"+ info[0]|string}} name={{"code_projet"+ info[0]|string}} maxlength="20" value="{{ info[2] }}"></td>
+                              </tr>
+                              <tr>
+                                <td> <label for="date">date publication</label></td>
+                                <td><input  class="form-control" type="text" id={{"date"+info[0]|string}} name={{"date"+info[0]|string}} maxlength="20" value="{{ info[3] }}"></td>
+                              </tr>
+                              <tr>
+                                <td><label for="duree">durée</label></td>
+                                <td>&nbsp;<input  class="form-control" type="text" id={{"duree"+info[0]|string}} name={{"duree"+info[0]|string}} maxlength="20" value="{{ info[4] }}"></td>
+                              </tr>
+                              <tr >
+                                  <td colspan="2" style="text-align: center">
+                                      <input class="btn btn-primary" type="submit" value="Modifier" name = "{{ info[0]}}" onclick=modifier('modifier',this.name)>
+                                      <input class="btn btn-danger" type="submit" value="Suprimer" name= "{{ info[0] }}" onclick=modifier('supprimer',this.name)>
+                                      <input class="btn btn-info" type="submit" value="Overview" name= "{{ info[0] }}" onclick=overview_calendar(this.name)>
+                                  </td>
+                              </tr>
+                            </tbody>
+                      </table>
+                    </div>
+
+                {% endfor %}
+
+                </div>
+            </div>
+
+{#            {% if infos|length >1 %}les arorows du carousel deviennent optionnels#}
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+
+{#            {% endif %}#}
+
+            </div>
+        </div>
+    </div>
+
+
+{% endif %}
+
+{% endblock %}
+
+{% block sidenav_left %}
+
+{% endblock %}
+
+{% block sidenav_right %}
+
+        <div id ='shooting_star'>
+            <img src="/static/images/Shootingstar-full.png" >
+        </div>
+
+
+{% endblock %}
