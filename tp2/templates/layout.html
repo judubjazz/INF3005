@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Animal Adoption</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style2.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"/>
+    {% block head %}
+    {% endblock %}
+
+</head>
+
+<body>
+<div class="main-container">
+    {#    <nav class="Header">#}
+    {#        <div class="container-fluid">#}
+    {#            <div class="navbar-header">#}
+    {#                <a class="navbar-brand" href="#">#}
+    {#                    <svg height="30" width="200">#}
+    {#                        <text x="0" y="15" fill="white">Kâjâjâ</text>#}
+    {#                        Sorry, your browser does not support inline SVG.#}
+    {#                    </svg>#}
+    {#                </a>#}
+    {#            </div>#}
+    {#            <ul class="nav navbar-nav">#}
+    {#                <li class=""><a href="http://localhost:5000/"><i class="fa fa-home fa-2x" aria-hidden="true"></i></a>#}
+    {#                </li>#}
+    {#                {% block user_logged %}{% endblock %}#}
+    {#            </ul>#}
+    {#        </div>#}
+    {#    </nav>#}
+    <div>
+        <header class="header-spacer">
+            <div class="header-container">
+                <div class="logo-bar-wrapper">
+                    <div class="logo-bar">
+                        <div class="logo">
+                            <a href="/">
+                                <svg>
+                                    <text x="0" y="15" fill="white">Kâjâjâ</text>
+                                    Sorry, your browser does not support inline SVG.
+                                </svg>
+                            </a>
+                        </div>
+
+                        <div class="header-tools">
+                            {% if id %}
+                                <div class="header-button"><a href="http://localhost:5000/myaccount">{{ id }}</a></div>
+                                <div class="header-button"><a href="http://localhost:5000/logout">Logout</a></div>
+                                <div class="header-button"><a href="http://localhost:5000/mypet">myPet</a></div>
+                                <div class="header-post"><a href="http://localhost:5000/post">Post Ad</a></div>
+                            {% else %}
+                                <div class="header-button"><a href="http://localhost:5000/login">Login</a></div>
+                                <div class="header-button"><a href="http://localhost:5000/register">Register</a></div>
+                                <div class="header-post"><a class="header-post" href="http://localhost:5000/post">Post
+                                    Ad</a></div>
+
+                            {% endif %}
+                            {% block user_logged %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-bar-wrapper">
+
+                    <div class="search-bar" action="http://localhost:5000/search" method="POST">
+                        <div class="search-keyword">
+                            <label class="search-label" for="input-keyword"></label>
+                            <input id="input-keyword" type="text" class="input-keyword" placeholder="keyword">
+                        </div>
+                        <div class="search-category">
+                            <label class="category-label" for="select-option"></label>
+                            <select id="select-option" class="select-option">
+                                <option value="0">All animals</option>
+                                <option value="1">Chiens</option>
+                                <option value="2">Chats</option>
+                                <option value="3">Autre</option>
+                            </select>
+{#                        <div><i class="glyphicon glyphicon-triangle-bottom"></i></div>#}
+                        </div>
+
+                        <button class="search-submit" onclick="submit_research()"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+    </div>
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+
+</div>
+
+</body>
+
+</html>
+
+

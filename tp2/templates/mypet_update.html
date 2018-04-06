@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block head %}
+    <script src="/static/js/mypet_update.js" type="text/javascript"></script>
+    <style>
+        #div1 {
+            width: 350px;
+            height: 70px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+    </style>
+    <script>
+
+    </script>
+{% endblock %}
+
+
+{% block content %}
+    {% for animal in animals %}
+        <div class="panel panel-primary article pointer_animal">
+
+
+            <h4>Animal:</h4>
+            <div class=""> Name : <input id="name" value="{{ animal[1] }}"/></div>
+            <br/>
+            <div class=""> Type : <input id="type" value="{{ animal[2] }}"/></div>
+            <br/>
+            <div class=""> Race : <input id="race" value="{{ animal[3] }}"/></div>
+            <br/>
+            <div class=""> Age : <input id="age" value="{{ animal[4] }}"/></div>
+            <br/>
+            <div class=""> Description : <input id="description" value="{{ animal[6] }}"/></div>
+            <br/>
+            <div class=""> Upload Photo: <input id="img_input" type="file" accept="image/*" onchange='readURL(this);'/>
+            </div>
+            <img id="img" alt='your friend' src={{ animal[7] }}/><br/>
+            <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <br/>
+            <input type="submit" value="Submit Update" onclick="uploadImage()">
+
+
+        </div>
+    {% endfor %}
+{% endblock %}
